@@ -17,7 +17,10 @@ export const Home = () => {
 
     const handlePopupConnexion = () => {
         setShowPopupConnexion(true);
-        
+    }
+
+    const handleClosePopupConnexion = () => {
+        setShowPopupConnexion(false);
     }
 
     return (
@@ -38,7 +41,10 @@ export const Home = () => {
 
                 {showPopupConnexion && (
                     <div className={showPopupConnexion ? "popupConnexion" : ""}>
-                        <PopupConnexion propsIsAlreadySignUp={isAlreadySignUp}></PopupConnexion>
+                        <PopupConnexion
+                            propsIsAlreadySignUp={isAlreadySignUp}
+                            propsHandleClosePopupConnexion={handleClosePopupConnexion}>
+                        </PopupConnexion>
                     </div>
                 )}
 
