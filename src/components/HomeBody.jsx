@@ -1,22 +1,32 @@
-import React from "react";
+import React, { useContext} from "react";
+import { SignInOrSignUpContext } from "../contexts/SignInOrSignUpContext";
 
 export const HomeBody = ({
-    propsIsAlreadySignUp,
+    // Récupération des props qui permettent d'afficher ou masquer la popup connexion/inscription
     propsShowPopupConnexion,
-    propsHandleSignInSignUp,
     propsHandlePopupConnexion}) => {
 
+    // Récupération des données du context SignInOrSignUpContext
+    const { isAlreadySignUp, handleSignInSignUp } = useContext(SignInOrSignUpContext);
+    // Vérification de la fonction handleSignInSignUp
+    // console.log("handleSignInSignUp : ", handleSignInSignUp);
+
+    // Le composant HomeBody retourne :
     return (
         <div>
             <button 
                 onClick={propsHandlePopupConnexion}
                 disabled={propsShowPopupConnexion}>
-                    {propsIsAlreadySignUp ? "Se connecter" : "S'inscrire"}
+                    {isAlreadySignUp ? "Se connecter" : "S'inscrire"}
             </button>
-            <a href="#" onClick={propsHandleSignInSignUp}>{propsIsAlreadySignUp ? "Je n'ai pas encore de compte" : "J'ai déjà un compte"}</a>
+            <p 
+                style={{textDecoration: "underline", color: "red", cursor: "pointer"}}
+                onClick={() => handleSignInSignUp()}>
+                        {isAlreadySignUp ? "Je n'ai pas encore de compte" : "J'ai déjà un compte"}
+            </p>
             <input placeholder="Rechercher une wish list"></input>
         </div>
-    )
-}
+    );
+};
 
 export default HomeBody;

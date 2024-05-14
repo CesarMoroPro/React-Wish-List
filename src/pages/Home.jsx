@@ -1,58 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 
+import { SignInOrSignUpProvider } from "../contexts/SignInOrSignUpContext";
 import HeaderHome from "../components/HeaderHome";
 import HomeBody from "../components/HomeBody";
 import Footer from "../components/Footer";
 import PopupConnexion from "../components/PopupConnexion";
-import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 
-export const Home = () => {
+const Home = () => {
 
-    const [isAlreadySignUp, setisAlreadySignUp] = useState(true);
+    // Définition de l'état d'affichage de la popup de connexion/inscription
     const [showPopupConnexion, setShowPopupConnexion] = useState(false);
-
-    const handleSignInSignUp = () => {
-        setisAlreadySignUp(!isAlreadySignUp);
-    }
-
+    // Définition de la fonction qui ouvre la popup de connexion/inscription
     const handlePopupConnexion = () => {
         setShowPopupConnexion(true);
     }
-
+    // Définition de la fonction qui ferme la popup de connexion/inscription
     const handleClosePopupConnexion = () => {
         setShowPopupConnexion(false);
     }
 
+    // Le composant Home retourne :
     return (
         <div>
             <HeaderHome></HeaderHome>
 
-            <div>
-                {!showPopupConnexion && (
-                    <div className="home-body">
-                        <HomeBody 
-                            propsIsAlreadySignUp={isAlreadySignUp}
-                            propsShowPopupConnexion={showPopupConnexion}
-                            propsHandleSignInSignUp={handleSignInSignUp}
-                            propsHandlePopupConnexion={handlePopupConnexion}>
-                        </HomeBody>
-                    </div>
-                )}
+            <SignInOrSignUpProvider>
+                <div>
+                    {!showPopupConnexion && (
+                        <div className="home-body">
+                            <HomeBody 
+                                propsShowPopupConnexion={showPopupConnexion}
+                                propsHandlePopupConnexion={handlePopupConnexion}>
+                            </HomeBody>
+                        </div>
+                    )}
 
-                {showPopupConnexion && (
-                    <div className={showPopupConnexion ? "popupConnexion" : ""}>
-                        <PopupConnexion
-                            propsIsAlreadySignUp={isAlreadySignUp}
-                            propsHandleClosePopupConnexion={handleClosePopupConnexion}>
-                        </PopupConnexion>
-                    </div>
-                )}
+                    {showPopupConnexion && (
+                        <div className={showPopupConnexion ? "popupConnexion" : ""}>
+                            <PopupConnexion
+                                propsHandleClosePopupConnexion={handleClosePopupConnexion}>
+                            </PopupConnexion>
+                        </div>
+                    )}
 
-            </div>
+                </div>
+            </SignInOrSignUpProvider>
+            
 
             <Footer></Footer>
         </div>
     )
-}
+};
 
 export default Home;

@@ -1,4 +1,7 @@
-import React from "react";
+// = ATTENTION : ce fichier n'est pas enfant de HomeBody mais directement de Home !
+
+import React, { useContext} from "react";
+import { SignInOrSignUpContext } from "../contexts/SignInOrSignUpContext";
 
 /**
  * Dans ce fichier (ou un fichier qui sera importé), POUR SE CONNECTER, il faut avoir accès aux données utilisateurs pour :
@@ -16,11 +19,15 @@ import React from "react";
  *      - ajouter une route pour être renvoyé sur la popup de connexion automatiquement
  */
 
-export const PopupConnexion = ({propsIsAlreadySignUp, propsHandleClosePopupConnexion}) => {
+export const PopupConnexion = ({propsHandleClosePopupConnexion}) => {
 
+    const { isAlreadySignUp } = useContext(SignInOrSignUpContext);
+
+
+    // Le composant PopupConnexion retourne :
     return (
         <div>
-            {propsIsAlreadySignUp && (
+            {isAlreadySignUp && (
                 <div>
                     <form action="">
                         <input type="text" placeholder="Nom d'utilisateur"/>
@@ -30,7 +37,7 @@ export const PopupConnexion = ({propsIsAlreadySignUp, propsHandleClosePopupConne
                 </div>
             )}
 
-            {!propsIsAlreadySignUp && (
+            {!isAlreadySignUp && (
                 <div>
                     <form action="">
                         <input type="text" placeholder="Nom"/>
