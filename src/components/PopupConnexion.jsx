@@ -1,6 +1,6 @@
 // = ATTENTION : ce fichier n'est pas enfant de HomeBody mais directement de Home !
 
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { SignInOrSignUpContext } from "../contexts/SignInOrSignUpContext";
 
 /**
@@ -21,7 +21,16 @@ import { SignInOrSignUpContext } from "../contexts/SignInOrSignUpContext";
 
 export const PopupConnexion = ({propsHandleClosePopupConnexion}) => {
 
+    // Récupération uniquement de isAlreadySignUp du contexte SignInOrSignUpContext
     const { isAlreadySignUp } = useContext(SignInOrSignUpContext);
+
+    // Traitement des données entrées par l'utilisateur
+    const handleValidation = (e) => {
+        console.log("données utilisateur reçues. Envoi en BDD en cours...");
+        e.preventDefault();
+
+    // Redirection vers la page de succès d'inscription
+    }
 
 
     // Le composant PopupConnexion retourne :
@@ -46,7 +55,7 @@ export const PopupConnexion = ({propsHandleClosePopupConnexion}) => {
                         <input type="text" placeholder="Mot de passe"/>
                         <input type="text" placeholder="Confirmez le mot de passe"/>
 
-                        <button>Valider l'inscription</button>
+                        <button onClick={handleValidation}>Valider l'inscription</button>
                     </form>
                 </div>
             )}

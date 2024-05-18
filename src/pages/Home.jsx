@@ -23,7 +23,7 @@ const Home = () => {
     // Le composant Home retourne :
     return (
         <div>
-            <HeaderHome></HeaderHome>
+            <HeaderHome/>
 
             <SignInOrSignUpProvider>
                 <div>
