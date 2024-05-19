@@ -1,10 +1,11 @@
 import React, { useContext} from "react";
 import { SignInOrSignUpContext } from "../contexts/SignInOrSignUpContext";
 
-export const HomeBody = ({
-    // Récupération des props qui permettent d'afficher ou masquer la popup connexion/inscription
-    propsShowPopupConnexion,
-    propsHandlePopupConnexion}) => {
+export const HomeBody = (
+    {
+        // Récupération des props qui permettent d'afficher ou masquer la popup connexion/inscription
+        propsShowPopupConnexion,
+        propsHandlePopupConnexion}) => {
 
     // Récupération des données du context SignInOrSignUpContext
     const { isAlreadySignUp, handleSignInSignUp } = useContext(SignInOrSignUpContext);
